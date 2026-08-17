@@ -7,8 +7,13 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   const sendQuestion = async () => {
+    if (loading) return
+
     const trimmed = question.trim()
-    if (!trimmed || loading) return
+    if (!trimmed) {
+      setMessages((prev) => [...prev, { role: 'bot', text: 'Please enter a question!' }])
+      return
+    }
 
     setMessages((prev) => [...prev, { role: 'user', text: trimmed }])
     setQuestion('')
@@ -58,6 +63,13 @@ function App() {
         />
         <button onClick={sendQuestion} disabled={loading}>
           Send
+        </button>
+        <button
+          className="clear"
+          onClick={() => setMessages([])}
+          disabled={loading || messages.length === 0}
+        >
+          Clear
         </button>
       </div>
     </div>
