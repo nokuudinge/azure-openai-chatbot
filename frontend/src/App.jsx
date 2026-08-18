@@ -11,7 +11,7 @@ function App() {
 
     const trimmed = question.trim()
     if (!trimmed) {
-      setMessages((prev) => [...prev, { role: 'bot', text: 'Please enter a question!' }])
+      setMessages((prev) => [...prev, { role: 'bot', text: 'Please ask a question!' }])
       return
     }
 
